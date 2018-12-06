@@ -1,0 +1,41 @@
+{
+  "name": "@xg4/service",
+  "version": "0.0.1",
+  "description": "qq mobile service for compatible",
+  "main": "dist/index.min.js",
+  "author": "xg4 <xingor4@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "keywords": [
+    "qq",
+    "service",
+    "mobile",
+    "compatible"
+  ],
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xg4/service.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xg4/service/issues"
+  },
+  "homepage": "https://github.com/xg4/service#readme",
+  "devDependencies": {
+    "@babel/core": "^7.2.0",
+    "@babel/plugin-proposal-class-properties": "^7.2.1",
+    "@babel/preset-env": "^7.2.0",
+    "rollup": "^0.67.4",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-uglify": "^6.0.0"
+  },
+  "dependencies": {
+    "@xg4/device": "^0.0.1"
+  }
+}
