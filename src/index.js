@@ -1,20 +1,21 @@
 import XDevice from '@xg4/device'
 
 export default class XService {
-  static new() {
+  static instance
+
+  static create() {
     if (!this.instance) {
       this.instance = new this()
     }
     return this.instance
   }
-  static instance
 
   constructor() {
     this.device = new XDevice()
   }
 
-  getServiceUrl(qq) {
-    const status = this.getServiceStatus()
+  fetch(qq) {
+    const status = this.getStatus()
     if (!status) {
       return null
     }
@@ -28,7 +29,7 @@ export default class XService {
     return URL_MAP[status]
   }
 
-  getServiceStatus() {
+  getStatus() {
     if (this.device.isMobile() || this.device.isIpad()) {
       // mobile
 
@@ -89,7 +90,7 @@ export default class XService {
         return 0
       }
 
-      // 百度浏览器都不行
+      // 百度浏览器
       if (this.device.find('baiduboxapp') || this.device.find('baidubrowser')) {
         return 0
       }
