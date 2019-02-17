@@ -1,6 +1,6 @@
 {
   "name": "@xg4/service",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "qq mobile service for compatible",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -17,7 +17,7 @@
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "rollup -c",
     "build": "npm run build:types && npm run build:js",
-    "release": "npm run build && git commit -am \"v\"$npm_package_version && git tag \"v\"$npm_package_version && git push && git push --tags && npm publish --access"
+    "release": "npm run build && git commit -am \"v\"%npm_package_version% && git tag \"v\"%npm_package_version% && git push && git push --tags && npm publish --access"
   },
   "keywords": [
     "qq",
