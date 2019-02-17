@@ -1,7 +1,7 @@
 import XDevice from '@xg4/device'
 
 export default class XService {
-  static instance
+  private static instance: XService
 
   static create() {
     if (!this.instance) {
@@ -10,11 +10,13 @@ export default class XService {
     return this.instance
   }
 
+  private device: XDevice
+
   constructor() {
     this.device = new XDevice()
   }
 
-  fetch(qq) {
+  fetch(qq: string | number) {
     const status = this.getStatus()
     if (!status) {
       return null
