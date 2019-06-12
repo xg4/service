@@ -2,31 +2,39 @@
   "name": "@xg4/service",
   "version": "0.0.3",
   "description": "qq mobile service for compatible",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
-  "browser": "dist/index.umd.js",
-  "typings": "dist/types/index.d.ts",
-  "types": "dist/types/index.d.ts",
+  "keywords": [
+    "compatible",
+    "mobile",
+    "qq",
+    "service"
+  ],
+  "homepage": "https://github.com/xg4/service#readme",
+  "bugs": {
+    "url": "https://github.com/xg4/service/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xg4/service.git"
+  },
+  "license": "MIT",
+  "author": "xg4 <xingor4@gmail.com>",
   "files": [
     "dist"
   ],
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "browser": "dist/index.umd.js",
+  "types": "dist/types/index.d.ts",
+  "typings": "dist/types/index.d.ts",
   "scripts": {
-    "dev": "rollup -c -w",
-    "type-check": "tsc --noEmit",
-    "type-check:watch": "npm run type-check -- --watch",
-    "build:types": "tsc --emitDeclarationOnly",
-    "build:js": "rollup -c",
     "build": "npm run build:types && npm run build:js",
-    "release": "npm run build && git commit -am \"v\"%npm_package_version% && git tag \"v\"%npm_package_version% && git push && git push --tags && npm publish --access"
+    "build:js": "rollup -c",
+    "build:types": "tsc --emitDeclarationOnly",
+    "dev": "rollup -c -w",
+    "release": "npm run build && git commit -am \"v\"%npm_package_version% && git tag \"v\"%npm_package_version% && git push && git push --tags && npm publish --access",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch"
   },
-  "keywords": [
-    "qq",
-    "service",
-    "mobile",
-    "compatible"
-  ],
-  "author": "xg4 <xingor4@gmail.com>",
-  "license": "MIT",
   "dependencies": {
     "@xg4/device": "^0.0.3"
   },
@@ -40,13 +48,5 @@
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-resolve": "^4.0.0",
     "rollup-plugin-terser": "^4.0.4"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/xg4/service.git"
-  },
-  "bugs": {
-    "url": "https://github.com/xg4/service/issues"
-  },
-  "homepage": "https://github.com/xg4/service#readme"
+  }
 }
