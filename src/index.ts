@@ -3,7 +3,7 @@ import XDevice from '@xg4/device'
 export default class XService {
   private static instance: XService
 
-  static create() {
+  public static create() {
     if (!this.instance) {
       this.instance = new this()
     }
@@ -12,11 +12,11 @@ export default class XService {
 
   private device: XDevice
 
-  constructor() {
+  public constructor() {
     this.device = new XDevice()
   }
 
-  fetch(qq: string | number) {
+  public fetch(qq: string | number) {
     const status = this.getStatus()
     if (!status) {
       return null
@@ -31,7 +31,7 @@ export default class XService {
     return URL_MAP[status]
   }
 
-  getStatus() {
+  private getStatus() {
     if (this.device.isMobile() || this.device.isIpad()) {
       // mobile
 

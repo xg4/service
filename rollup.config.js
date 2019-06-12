@@ -11,6 +11,7 @@ const plugins = [
   commonjs(),
   babel({
     extensions,
+    include: ['src/**/*'],
     exclude: 'node_modules/**'
   }),
   terser()
@@ -18,7 +19,7 @@ const plugins = [
 
 export default [
   {
-    input: './src/index.ts',
+    input: 'src/index.ts',
     external: ['@xg4/device'],
     output: [
       {
@@ -33,10 +34,10 @@ export default [
     plugins
   },
   {
-    input: './src/index.ts',
+    input: 'src/index.ts',
     output: [
       {
-        name: 'XService',
+        name: 'Service',
         file: pkg.browser,
         format: 'umd'
       }
