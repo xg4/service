@@ -829,10 +829,10 @@
     lodash.unescape "4.0.1"
     semver "5.5.0"
 
-"@xg4/device@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@xg4/device/-/device-0.0.3.tgz#0e31a1272b6d40cbcf588a0348b93f5adfcd4790"
-  integrity sha512-k8rC1zWOo0uFOxiPMpQyCil/MJXE6HimEfsK7GFbtvUZNs+s6o/kz12ZOGESYr1BzP0NzQ5+DpE2qyb2VNg43g==
+"@xg4/device@^0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@xg4/device/-/device-0.3.2.tgz#d4053500ceb859d0cf227661421fe899b43f4909"
+  integrity sha512-wQEcTWAT8qPUudxQgVmTbj0jIapMjK/38iTzPBpuebvbLh8f7jowphI4gOJ4/X4qcEfkrBXn2WEERX3PTk/KBg==
 
 acorn-jsx@^5.0.0:
   version "5.0.1"
