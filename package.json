@@ -36,9 +36,14 @@
     "lint": "eslint src/**/* --fix",
     "prepublishOnly": "npm run build",
     "postpublish": "git push && git push --tags",
+    "release:major": "npm version major -m \"build: release v%s\" ",
+    "release:minor": "npm version minor -m \"build: release v%s\" ",
+    "release:patch": "npm version patch -m \"build: release v%s\" ",
     "start": "rollup -c -w",
     "pretest": "npm run lint",
-    "test": "npm run lint",
+    "test": "jest",
+    "test:cov": "npm run test -- --coverage",
+    "test:watch": "jest --watch --notify",
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
     "preversion": "npm run test",
@@ -61,13 +66,14 @@
     ]
   },
   "dependencies": {
-    "@xg4/device": "^0.0.3"
+    "@xg4/device": "^0.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-typescript": "^7.3.3",
+    "@types/jest": "^24.0.13",
     "@typescript-eslint/eslint-plugin": "^1.10.2",
     "@typescript-eslint/parser": "^1.10.2",
     "eslint": "^5.16.0",
@@ -80,6 +86,7 @@
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-standard": "^4.0.0",
     "husky": "^2.4.1",
+    "jest": "^24.8.0",
     "lint-staged": "^8.2.0",
     "prettier": "^1.18.2",
     "rimraf": "^2.6.3",

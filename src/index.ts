@@ -1,93 +1,79 @@
-import XDevice from '@xg4/device'
+import Device from '@xg4/device'
 
-export default class XService {
-  private static instance: XService
+interface Options {
+  type: string
+  sourceType: string
+  source: string
+  menu: 'yes' | 'no'
+}
 
-  public static create() {
-    if (!this.instance) {
-      this.instance = new this()
-    }
-    return this.instance
-  }
+const defaultOptions = {
+  type: 'wpa',
+  sourceType: 'web',
+  source: 'qq',
+  menu: 'yes' as const
+}
 
-  private device: XDevice
+export default class Service {
+  private device: Device
 
-  public constructor() {
-    this.device = new XDevice()
-  }
-
-  public fetch(qq: string | number) {
-    const status = this.getStatus()
-    if (!status) {
-      return null
-    }
-
-    const URL_MAP = {
-      1: `http://wpa.qq.com/msgrd?v=3&uin=${qq}&site=qq&menu=yes`,
-      2: `mqqwpa://im/chat?chat_type=wpa&uin=${qq}&version=1&src_type=web&web_src=yidian51.com`,
-      3: `mqq://im/chat?chat_type=wpa&uin=${qq}&version=1&src_type=web`,
-      4: `tencent://message/?uin=${qq}&Site=https://wap.yidian51.com&Menu=yes`
-    }
-    return URL_MAP[status]
-  }
-
-  private getStatus() {
+  private get status() {
     if (this.device.isMobile() || this.device.isIpad()) {
       // mobile
 
       // iphone 7（15C202）  iphone6s(15E216) iphoneSE(OPiOS) iphone5(14G60)不兼容
       if (
-        this.device.find('15C202') ||
-        this.device.find('15E216') ||
-        this.device.find('14G60') ||
-        (this.device.find('OPiOS') && this.device.isIphone())
+        this.device.find('15c202') ||
+        this.device.find('15e216') ||
+        this.device.find('14g60') ||
+        (this.device.find('opios') && this.device.isIphone())
       ) {
         return 0
       }
 
       // iphone 6s 14A456 | iphone7 15C114 不兼容2345浏览器
       if (
-        this.device.find('Mb2345Browser') &&
+        this.device.find('mb2345browser') &&
         this.device.isIphone() &&
-        (this.device.find('14A456') || this.device.find('15C114'))
+        (this.device.find('14a456') || this.device.find('15c114'))
       ) {
         return 0
       }
 
       // iphone 6s 14A456 | iphone7 不兼容夸克浏览器
       if (
-        this.device.find('Quark') &&
+        this.device.find('quark') &&
         this.device.isIphone() &&
-        (this.device.find('14A456') || this.device.find('14F89'))
+        (this.device.find('14a456') || this.device.find('14f89'))
       ) {
         return 0
       }
 
       // iphone 6s 不兼容2345浏览器
       if (
-        this.device.find('UCBrowser') &&
+        this.device.find('ucbrowser') &&
         this.device.isIphone() &&
-        this.device.find('15E216')
+        this.device.find('15e216')
       ) {
         return 0
       }
 
       // iphone 5 不兼容 360安全浏览器
       if (
-        this.device.find('searchBrowser') &&
+        this.device.find('searchbrowser') &&
         this.device.isIphone() &&
-        this.device.find('12B466')
+        this.device.find('12b466')
       ) {
         return 0
       }
 
       // 火狐浏览器 iphone7 15C202不兼容  iphone 6s 不兼容 火狐浏览器
       if (
-        this.device.find('FxiOS') &&
+        this.device.find('fxios') &&
         this.device.isIphone() &&
-        (this.device.find('15C202') ||
-          this.device.find('15D100') ||
-          this.device.find('16A5288q'))
+        (this.device.find('15c202') ||
+          this.device.find('15d100') ||
+          this.device.find('16a5288q'))
       ) {
         return 0
       }
@@ -98,43 +84,43 @@ export default class XService {
       }
 
       // iphone手机 遨游浏览器 不兼容
-      if (this.device.find('MXiOS') && this.device.isIphone()) {
-        if (this.device.find('15C202') || this.device.find('14G60')) {
+      if (this.device.find('mxios') && this.device.isIphone()) {
+        if (this.device.find('15c202') || this.device.find('14g60')) {
           return 1
         }
         return 0
       }
 
       // 微信,在安卓端会识别到Safari,故单独执行,70606:
-      if (this.device.find('MicroMessenger')) {
+      if (this.device.find('micromessenger')) {
         return 1
       }
 
       // SE,QQ,71016:
-      if (this.device.find('iPhone 84') && this.device.find('MQQBrowser')) {
+      if (this.device.find('iphone 84') && this.device.find('mqqbrowser')) {
         return 2
       }
 
       // 70615:
-      if (this.device.find('UCBrowser') || this.device.find('MQQBrowser')) {
+      if (this.device.find('ucbrowser') || this.device.find('mqqbrowser')) {
         return 2
       }
 
       // 70615:
-      if (this.device.find('SogouMobileBrowser')) {
+      if (this.device.find('sogoumobilebrowser')) {
         return 1
       }
 
-      if (this.device.find('QihooBrowser')) {
+      if (this.device.find('qihoobrowser')) {
         return 2
       }
 
-      if (this.device.find('iPhone') && this.device.find('Safari')) {
+      if (this.device.find('iphone') && this.device.find('safari')) {
         return 2
       }
 
       // 0228：华为手机其他浏览器;
-      if (this.device.find('HUAWEI') && this.device.find('Safari')) {
+      if (this.device.find('huawei') && this.device.find('safari')) {
         return 3
       }
 
@@ -142,5 +128,20 @@ export default class XService {
     }
     // other
     return 4
+  }
+
+  public constructor(userAgent?: string) {
+    this.device = new Device(userAgent)
+  }
+
+  public get(qq: string | number, options?: Partial<Options>) {
+    options = { ...defaultOptions, ...options }
+    return [
+      null,
+      `http://wpa.qq.com/msgrd?v=3&uin=${qq}&site=${options.source}&menu=${options.menu}`,
+      `mqqwpa://im/chat?chat_type=${options.type}&uin=${qq}&version=1&src_type=${options.sourceType}&web_src=${options.source}`,
+      `mqq://im/chat?chat_type=${options.type}&uin=${qq}&version=1&src_type=${options.sourceType}`,
+      `tencent://message/?uin=${qq}&Site=${options.source}&Menu=${options.menu}`
+    ][this.status]
   }
 }
